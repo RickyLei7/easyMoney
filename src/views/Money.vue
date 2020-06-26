@@ -1,15 +1,15 @@
 <template>
-  <div>Money.vue</div>
+  <div>
+    Money.vue
+    <Nav />
+  </div>
+
 </template>
 
 <script lang="ts">
-  import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
-
-  @Component
-  export default class Money extends Vue {
-
-  }
+  export default {
+    name: 'Money',
+  };
 </script>
 
 <style lang="scss" scoped>
