@@ -1,6 +1,11 @@
 <template>
   <div class="nav">
-    <router-link to="/money">Money</router-link>
+    <router-link to="/money">
+      <svg>
+        <use xlink:href="#labels"></use>
+      </svg>
+      Money
+    </router-link>
     |
     <router-link to="/labels">Labels</router-link>
     |
@@ -9,12 +14,12 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
+  import x from '@/assets/icons/labels.svg'
 
-  @Component
-  export default class Nav extends Vue {
+  console.log(x);
 
+  export default {
+    name: 'Nav'
   }
 </script>
 
