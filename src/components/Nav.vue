@@ -1,34 +1,28 @@
 <template>
   <div class="nav">
     <router-link to="/money">
-      <svg>
-        <use xlink:href="#labels"></use>
-      </svg>
+    <Icon name="money"/>
       Money
     </router-link>
     |
-    <router-link to="/labels">Labels</router-link>
+    <router-link to="/labels">
+      <Icon name="labels"/>
+      Labels
+    </router-link>
     |
-    <router-link to="/statistics">Statistics</router-link>
+    <router-link to="/statistics">
+      <Icon name="statistics"/>
+      Statistics
+    </router-link>
   </div>
 </template>
 
 <script lang="ts">
-  const importAllSVG = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext)
-  try{
-    importAllSVG(require.context('../assets/icons',true, /\.svg$/));
-  }catch (error) {
-    console.log(error);
-  }
- 
-
-
-
-
-
+  import Icon from '@/components/Icon.vue';
   export default {
-    name: 'Nav'
-  }
+    name: 'Nav',
+    components: {Icon}
+  };
 </script>
 
 <style lang="scss" scoped>
