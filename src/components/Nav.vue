@@ -14,9 +14,17 @@
 </template>
 
 <script lang="ts">
-  import x from '@/assets/icons/labels.svg'
+  const importAllSVG = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext)
+  try{
+    importAllSVG(require.context('../assets/icons',true, /\.svg$/));
+  }catch (error) {
+    console.log(error);
+  }
+ 
 
-  console.log(x);
+
+
+
 
   export default {
     name: 'Nav'
