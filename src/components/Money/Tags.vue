@@ -14,7 +14,8 @@
 
 <script lang="ts">
   export default {
-    name: 'Tags'
+    name: 'Tags',
+
   };
 </script>
 
