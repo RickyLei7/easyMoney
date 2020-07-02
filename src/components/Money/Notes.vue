@@ -1,9 +1,10 @@
 <template>
   <div>
+    {{xxx}}
     <label class="notes">
       <span class="name">Note</span>
-      <input type="text" :value="value"
-             @input="onInput"
+      <input type="text"
+             v-model='xxx'
              placeholder="Type some notes here.">
     </label>
   </div>
@@ -15,12 +16,7 @@
 
   @Component
   export default class Notes extends Vue {
-    value = '';
-
-    onInput(event: KeyboardEvent) {
-      const input = event.target as HTMLButtonElement;
-      this.value = input.value;
-    }
+    xxx = '';
   }
 </script>
 
