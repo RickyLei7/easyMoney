@@ -1,10 +1,9 @@
 <template>
   <div>
-    {{xxx}}
     <label class="notes">
       <span class="name">Note</span>
       <input type="text"
-             v-model='xxx'
+             v-model='value'
              placeholder="Type some notes here.">
     </label>
   </div>
@@ -12,12 +11,18 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
+  import {Component, Watch} from 'vue-property-decorator';
 
   @Component
   export default class Notes extends Vue {
-    xxx = '';
+    value = '';
+
+    @Watch('value')
+    onValueChanged(value: string){
+      this.$emit('update:value', value)
+    }
   }
+
 </script>
 
 <style lang="scss" scoped>
