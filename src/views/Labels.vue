@@ -1,22 +1,13 @@
 <template>
   <Layout>
     <ol class="tags">
-      <li>
-        <span>food</span>
-        <Icon name="right"/>
-      </li>
-      <li>
-        <span>house</span>
-        <Icon name="right"/>
-      </li>
-      <li>
-        <span>transport</span>
+      <li v-for="tag in tags" :key="tag">
+        <span>{{tag}}</span>
         <Icon name="right"/>
       </li>
     </ol>
-
     <div class="createTag-wrapper">
-      <button class="createTag">
+      <button class="createTag" @click="createTag">
         New Tag
       </button>
     </div>
@@ -25,9 +16,29 @@
 </template>
 
 <script lang="ts">
-  export default {
-    name: 'Labels',
-  };
+  import Vue from 'vue';
+  import {Component} from 'vue-property-decorator';
+  import tagListModel from '@/models/tagListModel';
+
+  tagListModel.fetch();
+
+  @Component
+  export default class Labels extends Vue {
+    tags = tagListModel.data;
+
+    createTag() {
+      const name = window.prompt('Please type tag name');
+      if (name) {
+        const message =  tagListModel.create(name);
+        if(message === 'duplicated'){
+          window.alert('Tag duplicated')
+        }else if(message === 'success'){
+          window.alert('Add tag success')
+        }
+      }
+    }
+
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -42,7 +53,7 @@
       justify-content: space-between;
       border-bottom: 1px solid #e6e6e6;
       svg {
-        width: 240px;
+        width: 24000px;
         height: 24px;
         color: #666;
         margin-right: 16px;

@@ -16,29 +16,17 @@
   import Notes from '@/components/Money/Notes.vue';
   import Tags from '@/components/Money/Tags.vue';
   import {Component, Watch} from 'vue-property-decorator';
-  import model from '@/model';
+  import recordListModel from '@/models/recordListModel';
+  import tagListModel from '@/models/tagListModel'
 
-  // // database update
-  // const version = window.localStorage.getItem('version') || '0';
-  // const recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[ ]');
-  // if (version < '0.0.2') {
-  //   if (version === '0.0.1') {
-  //     recordList.forEach(record => {
-  //       record.createdAt = new Date(2020, 0, 0);
-  //     });
-  //     // save date
-  //     window.localStorage.setItem('recordList', JSON.stringify(this.recordList));
-  //   }
-  // }
-  // window.localStorage.setItem('version', '0.0.2');
-
-  const recordList = model.fetch();
+  const recordList = recordListModel.fetch();
+  const tagList = tagListModel.fetch()
 
   @Component({
     components: {Tags, Notes, Types, NumberPad}
   })
   export default class Money extends Vue {
-    tags = ['Food', 'House', 'Transport'];
+    tags = tagList;
     recordList: RecordItem[] = recordList;
     record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
 
@@ -51,14 +39,14 @@
     }
 
     saveRecord() {
-      const deepCloneRecord2: RecordItem = model.clone(this.record);
+      const deepCloneRecord2: RecordItem = recordListModel.clone(this.record);
       deepCloneRecord2.createdAt = new Date();
       this.recordList.push(deepCloneRecord2);
     }
 
     @Watch('recordList')
     onRecordListChange() {
-      model.save(this.recordList);
+      recordListModel.save(this.recordList);
     }
   }
 </script>
