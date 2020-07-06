@@ -1,11 +1,12 @@
 <template>
   <Layout>
-    <ol class="tags">
-      <li v-for="tag in tags" :key="tag.id">
+    <div class="tags">
+      <router-link class="tag" v-for="tag in tags" :key="tag.id"
+                   :to="`/labels/edit/${tag.id}`">
         <span>{{tag.name}}</span>
-        <Icon name="right"/>
-      </li>
-    </ol>
+        <Icon class="icon" name="right"/>
+      </router-link>
+    </div>
     <div class="createTag-wrapper">
       <button class="createTag" @click="createTag">
         New Tag
@@ -29,11 +30,11 @@
     createTag() {
       const name = window.prompt('Please type tag name');
       if (name) {
-        const message =  tagListModel.create(name);
-        if(message === 'duplicated'){
-          window.alert('Tag duplicated')
-        }else if(message === 'success'){
-          window.alert('Add tag success')
+        const message = tagListModel.create(name);
+        if (message === 'duplicated') {
+          window.alert('Tag duplicated');
+        } else if (message === 'success') {
+          window.alert('Add tag success');
         }
       }
     }
@@ -46,15 +47,15 @@
     background: white;
     font-size: 16px;
     padding-left: 16px;
-    > li {
+    > .tag {
       min-height: 44px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #e6e6e6;
-      svg {
-        width: 24000px;
-        height: 24px;
+      .icon {
+        width: 16px;
+        height: 16px;
         color: #666;
         margin-right: 16px;
       }
