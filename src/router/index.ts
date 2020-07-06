@@ -31,6 +31,10 @@ const routes = [
     component: EditLabel
   },
   {
+    path: '/labels/edit/',
+    component: EditLabel
+  },
+  {
     path: '*',
     component: NotFound
   }
