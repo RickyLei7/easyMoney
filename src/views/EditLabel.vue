@@ -1,16 +1,18 @@
 <template>
   <layout>
     <div class="navBar">
-      <Icon class="leftIcon" name="left"/>
+      <Icon class="leftIcon" name="left" @click="goBack"/>
       <span class="title">Edit Label</span>
       <span class="rightIcon"></span>
     </div>
     <div class="form-wrapper">
-      <FormItem :value="tag.name" field-name="Tag Name"
+      <FormItem :value="tag.name"
+                @update:value="update"
+                field-name="Tag Name"
                 placeholder="Type tag name here."/>
     </div>
     <div class="button-wrapper">
-      <Button>Delete Tag</Button>
+      <Button @click="remove">Delete Tag</Button>
     </div>
   </layout>
 </template>
@@ -38,6 +40,21 @@
       } else {
         this.$router.replace('/404');
       }
+    }
+
+    update(name: string) {
+      if (this.tag) {
+        tagListModel.update(this.tag.id, name);
+      }
+    }
+
+    remove() {
+      if (this.tag) {
+        tagListModel.remove(this.tag.id);
+      }
+    }
+    goBack(){
+      this.$router.back()
     }
   }
 
