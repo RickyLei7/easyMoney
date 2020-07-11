@@ -27,7 +27,7 @@
     components: {Button}
   })
   export default class Labels extends Vue {
-    tags = tagListModel.data;
+    tags = window.tagList;
 
     createTag() {
       const name = window.prompt('Please type tag name');
