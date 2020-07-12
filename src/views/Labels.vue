@@ -19,10 +19,8 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  import tagListModel from '@/models/tagListModel';
   import Button from '@/components/Button.vue';
 
-  tagListModel.fetch();
   @Component({
     components: {Button}
   })
@@ -32,10 +30,9 @@
     createTag() {
       const name = window.prompt('Please type tag name');
       if (name) {
-          window.createTag(name)
+        window.createTag(name);
       }
     }
-
   }
 </script>
 
