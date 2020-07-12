@@ -11,6 +11,15 @@ import tagListModel from '@/models/tagListModel';
 Vue.config.productionTip = false;
 
 window.tagList = tagListModel.fetch();
+window.createTag = (name: string) => {
+  const message = tagListModel.create(name);
+  if (message === 'duplicated') {
+    window.alert('Tag duplicated');
+  } else if (message === 'success') {
+    window.alert('Add tag success');
+  }
+
+};
 
 Vue.component('Nav', Nav);
 Vue.component('Layout', Layout);

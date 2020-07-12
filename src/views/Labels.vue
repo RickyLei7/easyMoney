@@ -32,12 +32,7 @@
     createTag() {
       const name = window.prompt('Please type tag name');
       if (name) {
-        const message = tagListModel.create(name);
-        if (message === 'duplicated') {
-          window.alert('Tag duplicated');
-        } else if (message === 'success') {
-          window.alert('Add tag success');
-        }
+          window.createTag(name)
       }
     }
 
