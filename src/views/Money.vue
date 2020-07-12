@@ -25,13 +25,12 @@
   import tagListModel from '@/models/tagListModel';
 
   const recordList = recordListModel.fetch();
-  const tagList = tagListModel.fetch();
 
   @Component({
     components: {Tags, FormItem, Types, NumberPad}
   })
   export default class Money extends Vue {
-    tags = tagList;
+    tags = window.tagList;
     recordList: RecordItem[] = recordList;
     record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
 
@@ -44,14 +43,12 @@
     }
 
     saveRecord() {
-      const deepCloneRecord2: RecordItem = recordListModel.clone(this.record);
-      deepCloneRecord2.createdAt = new Date();
-      this.recordList.push(deepCloneRecord2);
+      recordListModel.create(this.record)
     }
 
     @Watch('recordList')
     onRecordListChange() {
-      recordListModel.save(this.recordList);
+      recordListModel.save();
     }
   }
 </script>
