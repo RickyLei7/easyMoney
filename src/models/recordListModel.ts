@@ -4,10 +4,11 @@ const localStorageKeyName = 'recordList';
 const recordListModel = {
   data: [] as RecordItem[],
 
-  create(record: RecordItem){
+  create(record: RecordItem) {
     const deepCloneRecord2: RecordItem = clone(record);
     deepCloneRecord2.createdAt = new Date();
     this.data.push(deepCloneRecord2);
+    this.save();
   },
   fetch() {
     this.data = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[ ]') as RecordItem[];
