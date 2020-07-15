@@ -1,7 +1,6 @@
 <template>
   <div>
     <Layout class-prefix="layout">
-      {{record}}
       <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
       <Types :value.sync="record.type"/>
       <div class="notes">
@@ -9,7 +8,6 @@
                   placeholder="Type some notes here."
                   @update:value="onUpdateNotes"/>
       </div>
-      test
       <Tags/>
     </Layout>
   </div>
@@ -28,14 +26,11 @@
     components: {Tags, FormItem, Types, NumberPad},
     computed: {
       recordList() {
-        return this.$store.state.record
+        return this.$store.state.recordList
       },
-
     }
   })
   export default class Money extends Vue {
-
-
     record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
 
     created(){

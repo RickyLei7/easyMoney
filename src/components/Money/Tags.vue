@@ -20,14 +20,16 @@
   @Component({
     computed:{
       tagList() {
-        // TODO
-        // return this.$store.fetchTags();
-        return []
+        return this.$store.state.fetchTags();
       }
     }
     })
   export default class Tags extends Vue {
     selectedTags: string[] = [];
+
+    created(){
+      this.$store.commit('fetchTags')
+    }
 
     toggle(tag: string) {
       const index = this.selectedTags.indexOf(tag);
@@ -42,8 +44,7 @@
     createTag() {
       const name = window.prompt('Type a tag name please.');
       if (!name) {return window.alert('Type a tag name please.');}
-      // TODO
-      // store.createTag(name);
+      this.$store.commit('createTag', name);
     }
   }
 </script>
