@@ -42,7 +42,5 @@ const store = new Vuex.Store({
       window.localStorage.setItem('recordList', JSON.stringify(state.tagList));
     }
   }
-});
-
-
+})
 export default store;
