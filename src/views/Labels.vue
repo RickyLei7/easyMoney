@@ -25,12 +25,14 @@
     components: {Button}
   })
   export default class Labels extends Vue {
-    tags = window.tagList;
+    // TODO
+    tags = []; // store.tagList;
 
     createTag() {
       const name = window.prompt('Please type tag name');
       if (name) {
-        window.createTag(name);
+        // TODO
+        //store.createTag(name);
       }
     }
   }

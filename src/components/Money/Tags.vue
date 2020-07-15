@@ -4,7 +4,7 @@
       <button @click="createTag">Add New Tag</button>
     </div>
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag.id"
+      <li v-for="tag in tagList" :key="tag.id"
           :class="{selected: selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)">{{tag.name}}
       </li>
@@ -14,11 +14,19 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component, Prop} from 'vue-property-decorator';
+  import {Component} from 'vue-property-decorator';
 
-  @Component
+
+  @Component({
+    computed:{
+      tagList() {
+        // TODO
+        // return this.$store.fetchTags();
+        return []
+      }
+    }
+    })
   export default class Tags extends Vue {
-    @Prop() readonly dataSource: string[] | undefined;
     selectedTags: string[] = [];
 
     toggle(tag: string) {
@@ -28,17 +36,14 @@
       } else {
         this.selectedTags.push(tag);
       }
-      this.$emit('update:value', this.selectedTags)
+      this.$emit('update:value', this.selectedTags);
     }
 
     createTag() {
       const name = window.prompt('Type a tag name please.');
-      if (name === '') {
-        window.alert('Type a tag name please.');
-      } else if (this.dataSource) {
-        this.$emit('update:dataSource',
-          [...this.dataSource, name]);
-      }
+      if (!name) {return window.alert('Type a tag name please.');}
+      // TODO
+      // store.createTag(name);
     }
   }
 </script>

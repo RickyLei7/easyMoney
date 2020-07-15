@@ -9,7 +9,8 @@
                   placeholder="Type some notes here."
                   @update:value="onUpdateNotes"/>
       </div>
-      <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+      test
+      <Tags/>
     </Layout>
   </div>
 </template>
@@ -24,24 +25,30 @@
 
 
   @Component({
-    components: {Tags, FormItem, Types, NumberPad}
+    components: {Tags, FormItem, Types, NumberPad},
+    computed: {
+      recordList() {
+        return this.$store.state.record
+      },
+
+    }
   })
   export default class Money extends Vue {
-    tags = window.tagList;
-    recordList = window.recordList;
+
+
     record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
 
-    onUpdateTags(value: string[]) {
-      this.record.tags = value;
+    created(){
+      this.$store.commit('fetchRecords')
     }
-
     onUpdateNotes(value: string) {
       this.record.notes = value;
     }
 
     saveRecord() {
-      window.createRecord(this.record)
+      this.$store.commit('createRecord', this.record);
     }
+
   }
 </script>
 
@@ -50,7 +57,7 @@
     display: flex;
     flex-direction: column-reverse;
   }
-  .notes{
+  .notes {
     padding: 12px 0;
   }
 </style>
