@@ -15,20 +15,22 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
+  import {mixins} from 'vue-class-component';
+  import TagHelper from '@/mixins/TagHelper';
 
 
   @Component({
-    computed:{
+    computed: {
       tagList() {
-        return this.$store.state.fetchTags();
+        return this.$store.state.tagList;
       }
     }
-    })
-  export default class Tags extends Vue {
+  })
+  export default class Tags extends mixins(TagHelper) {
     selectedTags: string[] = [];
 
-    created(){
-      this.$store.commit('fetchTags')
+    created() {
+      this.$store.commit('fetchTags');
     }
 
     toggle(tag: string) {
@@ -39,12 +41,6 @@
         this.selectedTags.push(tag);
       }
       this.$emit('update:value', this.selectedTags);
-    }
-
-    createTag() {
-      const name = window.prompt('Type a tag name please.');
-      if (!name) {return window.alert('Type a tag name please.');}
-      this.$store.commit('createTag', name);
     }
   }
 </script>
